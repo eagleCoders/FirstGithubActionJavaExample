@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI
+name: First Action for Java Maven
 
 # Controls when the workflow will run
 on:
@@ -19,8 +19,8 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, macOS-latest, windows-latest]
-        java: [ 8.0.192, 8, 11.0.3, 17, 18-ea ]
+        os: [ubuntu-latest]
+        java: [ 11 ]
       fail-fast: false
       max-parallel: 4
     name: Test HelloWorld on JDK ${{ matrix.java }}, ${{ matrix.os }}
@@ -37,4 +37,4 @@ jobs:
           SOME_PASSWORD: ${{ secrets.MY_PASSWORD }}
           USERNAME: ${{ github.actor }}
           PASSWORD: ${{ secrets.GITHUB_TOKEN }}
-        run: mvn verify
+        run: mvn verify | mvn -B package --file pom.xml
